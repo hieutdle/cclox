@@ -13,6 +13,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(SOURCES
         src/main.cc
+        src/chunk.cc
+        src/debug.cc
 )
 
 add_executable(cclox ${SOURCES})
