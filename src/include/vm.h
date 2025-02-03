@@ -21,6 +21,9 @@ class VM {
   std::vector<uint8_t>::const_iterator ip;
 
   std::stack<Value> stack;
+
+  template <typename Op>
+  void binaryOp(Op operation);
 };
 
 }  // namespace cclox

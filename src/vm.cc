@@ -46,8 +46,21 @@ InterpretResult VM::run() {
         break;
       }
       case OP_RETURN:
+        std::cout << "Return: " << stack.top() << std::endl;
         stack.pop();
         return INTERPRET_OK;
+      case OP_ADD:
+        binaryOp(std::plus<Value>());
+        break;
+      case OP_SUBTRACT:
+        binaryOp(std::minus<Value>());
+        break;
+      case OP_MULTIPLY:
+        binaryOp(std::multiplies<Value>());
+        break;
+      case OP_DIVIDE:
+        binaryOp(std::divides<Value>());
+        break;
       case OP_CONSTANT: {
         Value constant = read_constant();
         stack.push(constant);
@@ -58,6 +71,15 @@ InterpretResult VM::run() {
         return INTERPRET_RUNTIME_ERROR;
     }
   }
+}
+
+template <typename Op>
+void VM::binaryOp(Op operation) {
+  Value b = stack.top();
+  stack.pop();
+  Value a = stack.top();
+  stack.pop();
+  stack.push(operation(a, b));
 }
 
 uint8_t VM::read_byte() {
