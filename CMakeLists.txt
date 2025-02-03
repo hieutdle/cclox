@@ -15,6 +15,7 @@ set(SOURCES
         src/main.cc
         src/chunk.cc
         src/debug.cc
+        src/vm.cc
 )
 
 add_executable(cclox ${SOURCES})
@@ -22,3 +23,11 @@ add_executable(cclox ${SOURCES})
 target_include_directories(cclox PUBLIC
     ${CMAKE_HOME_DIRECTORY}/src/include
 )
+
+# Enable debug mode if specified
+option(DEBUG_TRACE_EXECUTION "Enable debug trace execution" OFF)
+
+if(DEBUG_TRACE_EXECUTION)
+    add_definitions(-DDEBUG_TRACE_EXECUTION)
+    message(STATUS "Debug mode enabled: DEBUG_TRACE_EXECUTION")
+endif()

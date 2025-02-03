@@ -7,6 +7,7 @@
 namespace cclox {
 
 enum OpCode : uint8_t {
+  OP_NEGATE,
   OP_CONSTANT,
   OP_RETURN,
 };

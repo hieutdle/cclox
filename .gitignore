@@ -31,7 +31,12 @@
 *.out
 *.app
 
+# vscode
 build
+.vscode
+
+# Jetbrains
 cmake-build-debug
+.idea
 
 .cache

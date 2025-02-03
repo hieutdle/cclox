@@ -26,7 +26,7 @@ int disassembleInstruction(Chunk* chunk, int offset) {
   std::cout << std::setw(4) << std::setfill('0') << offset << " ";
 
   if (offset > 0 && chunk->lines[offset] == chunk->lines[offset - 1]) {
-    std::cout << "   | ";
+    std::cout << "  | ";
   } else {
     std::cout << chunk->lines[offset] << " ";
   }
@@ -34,6 +34,8 @@ int disassembleInstruction(Chunk* chunk, int offset) {
   uint8_t instruction = chunk->code[offset];
 
   switch (instruction) {
+    case OP_NEGATE:
+      return simpleInstruction("OP_NEGATE", offset);
     case OP_RETURN:
       return simpleInstruction("OP_RETURN", offset);
     case OP_CONSTANT:
