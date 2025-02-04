@@ -1,8 +1,16 @@
 #include "vm.h"
 #include <iostream>
+#include <string_view>
+#include "compiler.h"
 #include "debug.h"
 
 namespace cclox {
+InterpretResult VM::interpret(std::string_view source) {
+  Compiler compiler;
+  compiler.compile(source);
+  return INTERPRET_OK;
+}
+
 InterpretResult VM::interpret(Chunk* chunk) {
   this->chunk = chunk;
   this->ip = this->chunk->code.begin();
@@ -30,7 +38,7 @@ void VM::printStack(std::stack<Value> stack) {
 }
 
 InterpretResult VM::run() {
-  for (;;) {
+  while (true) {
 #ifdef DEBUG_TRACE_EXECUTION
     std::cout << "Debug trace: " << std::endl;
     printStack(stack);

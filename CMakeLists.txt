@@ -12,9 +12,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(SOURCES
-        src/main.cc
         src/chunk.cc
+        src/compiler.cc
         src/debug.cc
+        src/main.cc
+        src/scanner.cc
         src/vm.cc
 )
 

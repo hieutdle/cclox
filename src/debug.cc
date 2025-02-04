@@ -11,12 +11,12 @@ void disassembleChunk(Chunk* chunk, std::string_view name) {
   }
 }
 
-static int simpleInstruction(std::string_view name, int offset) {
+int simpleInstruction(std::string_view name, int offset) {
   std::cout << name << std::endl;
   return offset + 1;
 }
 
-static int constantInstruction(std::string_view name, Chunk* chunk, int offset) {
+int constantInstruction(std::string_view name, Chunk* chunk, int offset) {
   int constant = chunk->code[offset + 1];
   std::cout << name << " " << constant << " '" << chunk->constants[constant] << "'" << std::endl;
   return offset + 2;
