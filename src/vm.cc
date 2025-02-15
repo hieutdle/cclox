@@ -2,19 +2,21 @@
 #include <iostream>
 #include <string_view>
 #include "compiler.h"
-#include "debug.h"
 
 namespace cclox {
 InterpretResult VM::interpret(std::string_view source) {
+  Chunk chunk;
   Compiler compiler;
-  compiler.compile(source);
-  return INTERPRET_OK;
-}
+  if (!compiler.compile(source, &chunk)) {
+    return INTERPRET_COMPILE_ERROR;
+  }
 
-InterpretResult VM::interpret(Chunk* chunk) {
-  this->chunk = chunk;
+  this->chunk = &chunk;
   this->ip = this->chunk->code.begin();
-  return run();
+
+  InterpretResult result = run();
+
+  return result;
 }
 
 void VM::printStack(std::stack<Value> stack) {
